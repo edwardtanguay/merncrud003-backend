@@ -27,7 +27,7 @@ app.use(
 		secret: config.SESSION_SECRET,
 		cookie: {
 			httpOnly: true,
-			sameSite: 'lax',
+			sameSite: 'strict',
 			secure: false
 		}
 	})
