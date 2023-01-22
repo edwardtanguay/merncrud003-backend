@@ -7,9 +7,9 @@
 	"scripts": {
 		"dev": "nodemon",
 		"build": "tsc",
-		"setup": "pm2 start --name merncrud003 npm -- start",
+		"setup": "pm2 start --name merncrud003-backend npm -- start",
 		"start": "node dist/server.js",
-		"deploy": "git pull --no-rebase && npm i && npm run build && pm2 restart merncrud003 --update-env --time && pm2 save"
+		"deploy": "git pull --no-rebase && npm i && npm run build && pm2 restart merncrud003-backend --update-env --time && pm2 save"
 	},
 	"nodemonConfig": {
 		"watch": [
