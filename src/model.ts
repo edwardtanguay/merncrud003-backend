@@ -31,17 +31,22 @@ export const getBook = async (_id: string) => {
 
 export const addBook = async (book: INewBook) => {
 	return new Promise(async (resolve, reject) => {
-		const docBook = new Book(book);
-		const addedDocBook = await docBook.save();
-		resolve(addedDocBook.toObject({ versionKey: false }));
+		try {
+			const docBook = new Book(book);
+			const addedDocBook = await docBook.save();
+			resolve(addedDocBook.toObject({ versionKey: false }));
+		}
+		catch (e: any) {
+			reject(e)
+		}
 	});
 }
 
 export const replaceBook = async (_id: string, changedBook: INewBook) => {
-	const oldBook = await Book.find({ _id});
-    await Book.updateOne({ _id }, {$set: {...changedBook}});
+	const oldBook = await Book.find({ _id });
+	await Book.updateOne({ _id }, { $set: { ...changedBook } });
 	const newBook = await Book.find({ _id });
-	return {oldBook, newBook};
+	return { oldBook, newBook };
 }
 
 export const deleteBook = async (_id: string) => {

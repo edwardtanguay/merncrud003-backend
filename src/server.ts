@@ -92,9 +92,14 @@ const authorizeUser = (req: express.Request, res: express.Response, next: expres
 }
 
 app.post('/book', authorizeUser, async (req, res) => {
-	const book: INewBook = req.body;
-	const result = await model.addBook(book);
-	res.status(200).send(result);
+	try {
+		const book: INewBook = req.body;
+		const result = await model.addBook(book);
+		res.status(200).send(result);
+	}
+	catch (e) {
+		res.status(400).send(e.message);
+	}
 });
 
 app.put('/book/:id', authorizeUser, async (req, res) => {
